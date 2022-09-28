@@ -11,10 +11,12 @@ public class ActivitiDemo {
     void testDeployment() {
         // 创建 processEngine
         ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+        // 获取 repositoryService
         RepositoryService repositoryService = processEngine.getRepositoryService();
+        // 把 bpmn 保存到数据库
         Deployment deployment = repositoryService.createDeployment()
                 .addClasspathResource("bpmn/dd.bpmn20.xml")
-                .addClasspathResource("bpmn/dd.png")
+                .addClasspathResource("bpmn/dd.png") // png,jpg,gif,svg
                 .name("请假流程申请")
                 .deploy();
 
