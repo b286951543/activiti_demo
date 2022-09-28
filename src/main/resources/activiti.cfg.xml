@@ -26,6 +26,6 @@
         <!-- actitivi 数据库表处理策略 -->
         <!-- 启动时检查表结构，没有则创建，有则检查是否符合要求 -->
         <!-- true,false,create-drop,drop-create -->
-        <property name="databaseSchemaUpdate" value="drop-create"/>
+        <property name="databaseSchemaUpdate" value="false"/>
     </bean>
 </beans>
