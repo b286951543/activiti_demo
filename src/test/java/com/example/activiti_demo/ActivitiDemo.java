@@ -82,7 +82,7 @@ public class ActivitiDemo {
      */
     @Test
     void testFindPersonalTaskList() {
-        String assignee = "worker";
+        String assignee = "manager";
         // 创建 processEngine
         ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
         // 获取 taskService
@@ -98,6 +98,7 @@ public class ActivitiDemo {
             System.out.println("任务id:" + task.getId()); // 指的是 提交请假申请 这一个步骤的 id
             System.out.println("任务负责人:" + task.getAssignee());
             System.out.println("任务名称:" + task.getName());
+            System.out.println("业务id:" + task.getBusinessKey()); // 启动流程实例时传入
             Map<String, Object> map = taskService.getVariables(task.getId());
             System.out.println("上次步骤携带的参数:" + map);
         }

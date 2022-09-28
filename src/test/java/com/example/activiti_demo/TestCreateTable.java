@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 
 public class TestCreateTable {
     @Test
-    void test() {
-        // 创建 activiti 的表结构
+    void testCreateTable() {
+        // 创建 activiti 的表结构，需要设置 activiti.cfg.xml 的 databaseSchemaUpdate 属性
         ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
         // processEngineConfiguration 为 bean 的 id
 //        ProcessEngineConfiguration processEngine = ProcessEngineConfiguration.createProcessEngineConfigurationFromResource("activiti.cfg.xml", "processEngineConfiguration");
