@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/processdef">
-  <process id="dd" name="请假流程审批" isExecutable="true">
+  <process id="ddId" name="dd流程审批" isExecutable="true">
     <endEvent id="sid-acc93230-98cc-4b0a-8715-2a13418e2aa2"/>
     <userTask id="sid-783980b9-0396-40e6-bf82-866f27a149d2" activiti:assignee="worker" name="提交请假申请"/>
     <userTask id="sid-0ca158d2-2e4b-4a8a-834a-4bc02704eb5f" name="部门经理审批" activiti:assignee="manager"/>
@@ -12,7 +12,7 @@
     <sequenceFlow id="sid-637812be-5caa-4fd5-890f-0f2dbd7721f8" sourceRef="sid-0ca158d2-2e4b-4a8a-834a-4bc02704eb5f" targetRef="sid-d1c8877c-c335-4330-8d88-b8ff2c28a844"/>
   </process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_dd">
-    <bpmndi:BPMNPlane bpmnElement="dd" id="BPMNPlane_dd">
+    <bpmndi:BPMNPlane bpmnElement="ddId" id="BPMNPlane_dd">
       <bpmndi:BPMNShape id="shape-0ef2b532-0e74-4bef-b8b7-c867193c4e5e" bpmnElement="sid-acc93230-98cc-4b0a-8715-2a13418e2aa2">
         <omgdc:Bounds x="639.7417" y="78.85832" width="30.0" height="30.0"/>
       </bpmndi:BPMNShape>
