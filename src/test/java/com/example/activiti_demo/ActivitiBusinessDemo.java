@@ -13,7 +13,7 @@ public class ActivitiBusinessDemo {
     void addBusinessKey() {
         ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
         RuntimeService runtimeService = processEngine.getRuntimeService();
-        // 启动流程时，添加业务key(可保存出差申请单的id，或者json数据)，用于关联其他业务信息，长度限制255，对应表格为：act_ru_task
+        // 启动流程时，添加业务key(可保存业务相关表格的id，或者json数据)，用于关联其他业务信息，长度限制255，对应表格为：act_ru_task
         ProcessInstance instance = runtimeService.startProcessInstanceByKey("myLeave1", "1001");
         System.out.println("businessKey:" + instance.getBusinessKey());
     }
