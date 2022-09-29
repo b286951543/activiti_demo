@@ -31,7 +31,9 @@ public class ActivitiDemo {
         Deployment deployment = repositoryService.createDeployment()
                 .addClasspathResource("bpmn/dd.bpmn20.xml")
                 .addClasspathResource("bpmn/dd.ddId.png") // png,jpg,gif,svg
-                .name("请假流程申请部署")
+//                .addClasspathResource("bpmn/evection_global.bpmn20.xml")
+//                .addClasspathResource("bpmn/evection_global.png")
+                .name("dd测试")
                 .deploy();
 
         System.out.println("流程部署id:" + deployment.getId());
@@ -84,7 +86,7 @@ public class ActivitiDemo {
      */
     @Test
     void testFindPersonalTaskList() {
-        String assignee = "manager";
+        String assignee = "financer";
         // 创建 processEngine
         ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
         // 获取 taskService
@@ -96,10 +98,11 @@ public class ActivitiDemo {
                 .list();
 
         for (Task task: list){
-            System.out.println("流程实例id:" + task.getProcessDefinitionId()); // 指的是 myLeave1 整个流程的实例的 id
+            System.out.println("流程定义id:" + task.getProcessDefinitionId());
+            System.out.println("流程实例id:" + task.getProcessInstanceId()); // 指的是 myLeave1 整个流程的实例的 id
             System.out.println("任务id:" + task.getId()); // 指的是 提交请假申请 这一个步骤的 id
-            System.out.println("任务负责人:" + task.getAssignee());
             System.out.println("任务名称:" + task.getName());
+            System.out.println("任务负责人:" + task.getAssignee());
             System.out.println("业务id:" + task.getBusinessKey()); // 启动流程实例时传入
             Map<String, Object> map = taskService.getVariables(task.getId());
             System.out.println("上次步骤携带的参数:" + map);
@@ -181,16 +184,18 @@ public class ActivitiDemo {
         RepositoryService repositoryService = processEngine.getRepositoryService();
         ProcessDefinitionQuery processDefinitionQuery = repositoryService.createProcessDefinitionQuery();
         // 查询当前 key 的所有的流程定义
-        List<ProcessDefinition> definitionList = processDefinitionQuery.processDefinitionKey("myLeave1")
+        List<ProcessDefinition> definitionList = processDefinitionQuery
+//                .processDefinitionKey("myLeave1")
                 .orderByProcessDefinitionVersion() // 按照版本排序
                 .desc()
                 .list();
         for (ProcessDefinition processDefinition: definitionList){
+            System.out.println("流程部署id:" + processDefinition.getDeploymentId());
             System.out.println("流程定义id:" + processDefinition.getId());
             System.out.println("流程定义name:" + processDefinition.getName());
             System.out.println("流程定义key:" + processDefinition.getKey());
             System.out.println("流程定义version:" + processDefinition.getVersion());
-            System.out.println("流程部署id:" + processDefinition.getDeploymentId());
+            System.out.println("==================");
         }
     }
 
@@ -223,7 +228,7 @@ public class ActivitiDemo {
     @Test
     void testDeleteDeployment() {
         // 流程部署id
-        String deploymentId = "1";
+        String deploymentId = "35001";
         ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
         RepositoryService repositoryService = processEngine.getRepositoryService();
         // 删除流程定义，如果该流程定义有流程实例启动，则删除时出错
@@ -277,10 +282,11 @@ public class ActivitiDemo {
 
         List<HistoricActivityInstance> list = instanceQuery.list();
         for (HistoricActivityInstance bean: list){
-            System.out.println("流程定义id：" + bean.getProcessDefinitionId());
-            System.out.println("流程实例id" + bean.getProcessInstanceId());
+            System.out.println("流程定义id:" + bean.getProcessDefinitionId());
+            System.out.println("流程实例id:" + bean.getProcessInstanceId());
             System.out.println("任务id:" + bean.getActivityId());
-            System.out.println("任务名称：" + bean.getActivityName());
+            System.out.println("任务名称:" + bean.getActivityName());
+            System.out.println("任务负责人:" + bean.getAssignee());
             System.out.println("=======================");
         }
     }
