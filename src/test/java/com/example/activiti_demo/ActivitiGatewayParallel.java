@@ -1,10 +1,8 @@
 package com.example.activiti_demo;
 
 import com.example.activiti_demo.model.Evection;
-import org.activiti.engine.ProcessEngine;
-import org.activiti.engine.ProcessEngines;
-import org.activiti.engine.RuntimeService;
-import org.activiti.engine.TaskService;
+import org.activiti.engine.*;
+import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import org.junit.jupiter.api.Test;
@@ -15,8 +13,30 @@ import java.util.Map;
 
 /**
  * 并行网关，多个任务同时执行，并且需要任务都执行完后，才能继续执行
+ * 在该网关上设置条件是不能生效的
  */
 public class ActivitiGatewayParallel {
+
+    @Test
+    void testDeployment() {
+        // 创建 processEngine
+        ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+        // 获取 repositoryService
+        RepositoryService repositoryService = processEngine.getRepositoryService();
+        // 把 bpmn 保存到数据库
+        Deployment deployment = repositoryService.createDeployment()
+                .addClasspathResource("bpmn/parallel_gateway.bpmn20.xml")
+                .addClasspathResource("bpmn/parallel_gateway.png")
+                .name("并行网关测试")
+                .deploy();
+
+        // 部署的相关表格为：act_re_deployment
+        // 流程定义的相关表格: act_re_procdef
+        // 流程实例的相关表格： act_ru_execution
+        System.out.println("流程部署id:" + deployment.getId());
+        System.out.println("流程部署名称:" + deployment.getName());
+    }
+
     /**
      * 启动流程实例
      */
