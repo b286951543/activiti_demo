@@ -18,7 +18,9 @@ import java.util.Map;
 import java.util.zip.ZipInputStream;
 
 public class ActivitiDemo {
-    // 单个流程部署
+    /**
+     * 单个流程部署
+     */
     @Test
     void testDeployment() {
         // 创建 processEngine
@@ -37,7 +39,7 @@ public class ActivitiDemo {
     }
 
     /**
-     * zip压缩文件上传方式部署
+     * zip压缩文件上传方式部署，批量部署
      */
     @Test
     void testDeploymentByZip() {
@@ -166,6 +168,9 @@ public class ActivitiDemo {
         taskService.complete(task.getId(), map);
     }
 
+    /**
+     * 根据key 查询所有的流程定义
+     */
     @Test
     void testQueryProcessDefinition() {
         // 创建 processEngine
@@ -186,7 +191,9 @@ public class ActivitiDemo {
         }
     }
 
-    // 查询当前 key 有哪些流程实例在跑
+    /**
+     * 查询当前 key 有哪些流程实例在跑
+     */
     @Test
     void testQueryProcessInstance() {
         ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
@@ -207,6 +214,9 @@ public class ActivitiDemo {
         }
     }
 
+    /**
+     * 根据流程部署id删除流程定义
+     */
     @Test
     void testDeleteDeployment() {
         // 流程部署id
@@ -219,7 +229,10 @@ public class ActivitiDemo {
 //        repositoryService.deleteDeployment(deploymentId, true);
     }
 
-    // 资源文件下载
+    /**
+     * 资源文件下载
+     * @throws IOException
+     */
     @Test
     void testQueryBpmnFile() throws IOException {
         ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
@@ -247,6 +260,9 @@ public class ActivitiDemo {
         bpmnInput.close();
     }
 
+    /**
+     * 查看历史记录
+     */
     @Test
     void testFindHistoryInfo() {
         ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
