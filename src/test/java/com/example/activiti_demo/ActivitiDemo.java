@@ -160,8 +160,10 @@ public class ActivitiDemo {
         // 返回一个一个任务对象
         Task task = taskService.createTaskQuery()
                 .processDefinitionKey("myLeave1")
+                .processInstanceId("15001") // 可以根据实例id来查找
                 .taskAssignee("financer")
                 .singleResult(); // 这里只会查询到一个任务，如果查到有多个任务，会抛出异常
+
         Map<String, Object> map = taskService.getVariables(task.getId());
         System.out.println("上次步骤携带的参数:" + map);
         map.put("result2", "通过");
