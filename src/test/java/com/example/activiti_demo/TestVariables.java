@@ -22,11 +22,14 @@ public class TestVariables {
         RepositoryService repositoryService = processEngine.getRepositoryService();
         // 把 bpmn 保存到数据库
         Deployment deployment = repositoryService.createDeployment()
-                .addClasspathResource("bpmn/evection_global.bpmn20.xml")
-                .addClasspathResource("bpmn/evection_global.png")
-                .name("全局变量测试")
+                .addClasspathResource("bpmn/parallel_gateway.bpmn20.xml")
+                .addClasspathResource("bpmn/parallel_gateway.png")
+                .name("并行网关测试")
                 .deploy();
 
+        // 部署的相关表格为：act_re_deployment
+        // 流程定义的相关表格: act_re_procdef
+        // 流程实例的相关表格： act_ru_execution
         System.out.println("流程部署id:" + deployment.getId());
         System.out.println("流程部署名称:" + deployment.getName());
     }
@@ -103,10 +106,11 @@ public class TestVariables {
 
 //            taskService.complete(task.getId(), map, true); // 参数不知道怎么取出来，不要用
 
-//            taskService.complete(task.getId());
+            taskService.complete(task.getId());
 
 //            taskService.setVariablesLocal(task.getId(), map); // 本地变量，只在当前任务有效，下一个任务会失效。能通过 taskService.getVariablesLocal( taskid ) 获取
 //            taskService.complete(task.getId());
+            System.out.println("完成了任务：" + task.getId());
         }
     }
 }
