@@ -1,9 +1,6 @@
 package com.example.activiti_demo;
 
-import org.activiti.engine.ProcessEngine;
-import org.activiti.engine.ProcessEngines;
-import org.activiti.engine.RepositoryService;
-import org.activiti.engine.RuntimeService;
+import org.activiti.engine.*;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.junit.jupiter.api.Test;
@@ -22,14 +19,15 @@ public class ActivitiBusinessDemo {
     }
 
     /**
-     * 暂停（挂起）、激活全部流程实例
+     * 暂停（挂起）、激活该定义下的全部流程实例
      */
     @Test
-    void addSuspendAllProcessInstance() {
+    void testSuspendAllProcessInstance() {
         ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
         RepositoryService repositoryService = processEngine.getRepositoryService();
         // 获取流程定义
         ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery()
+//                .processDefinitionId("")
                 .processDefinitionKey("myLeave1")
                 .singleResult();
 
@@ -47,6 +45,30 @@ public class ActivitiBusinessDemo {
                     true, // 是否暂停
                     null); // 暂停的时间
             System.out.println("流程定义id:" + definitionId + " 已暂停");
+        }
+    }
+
+    /**
+     * 挂起、激活单个流程实例
+     */
+    @Test
+    void testSuspendSingleProcessInstance() {
+        ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+        RuntimeService runtimeService = processEngine.getRuntimeService();
+        ProcessInstance instance = runtimeService.createProcessInstanceQuery()
+                .processInstanceId("20001")
+                .singleResult();
+
+        boolean suspended = instance.isSuspended();
+        String instanceId = instance.getId();
+
+        if (suspended){
+            // 已经暂停，重新激活
+            runtimeService.activateProcessInstanceById(instanceId);
+            System.out.println("流程实例id:" + instanceId + " 已激活");
+        }else {
+            runtimeService.suspendProcessInstanceById(instanceId);
+            System.out.println("流程实例id:" + instanceId + " 已暂停");
         }
     }
 }

@@ -139,7 +139,8 @@ public class ActivitiDemo {
         // 根据流程 key 和任务负责人查询任务
         // 返回一个一个任务对象
         Task task = taskService.createTaskQuery()
-                .processDefinitionKey("myLeave1")
+//                .processDefinitionKey("myLeave1")
+                .processInstanceId("20001")
                 .taskAssignee("manager")
                 .singleResult(); // 这里只会查询到一个任务，如果查到有多个任务，会抛出异常
         Map<String, Object> map = taskService.getVariables(task.getId());
@@ -206,8 +207,8 @@ public class ActivitiDemo {
 
         for (ProcessInstance processInstance: list){
             System.out.println("-------------------");
-            System.out.println("流程实例id:" + processInstance.getProcessInstanceId());
             System.out.println("所属流程定义id:" + processInstance.getProcessDefinitionId());
+            System.out.println("流程实例id:" + processInstance.getProcessInstanceId());
             System.out.println("是否执行完成:" + processInstance.isEnded());
             System.out.println("是否暂停:" + processInstance.isSuspended());
             System.out.println("当前活动标识:" + processInstance.getActivityId());
@@ -276,10 +277,10 @@ public class ActivitiDemo {
 
         List<HistoricActivityInstance> list = instanceQuery.list();
         for (HistoricActivityInstance bean: list){
-            System.out.println("------" + bean.getActivityId());
-            System.out.println("------" + bean.getActivityName());
-            System.out.println("------" + bean.getProcessDefinitionId());
-            System.out.println("------" + bean.getProcessInstanceId());
+            System.out.println("流程定义id：" + bean.getProcessDefinitionId());
+            System.out.println("流程实例id" + bean.getProcessInstanceId());
+            System.out.println("任务id:" + bean.getActivityId());
+            System.out.println("任务名称：" + bean.getActivityName());
             System.out.println("=======================");
         }
     }
