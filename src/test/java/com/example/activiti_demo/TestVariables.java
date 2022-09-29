@@ -76,7 +76,7 @@ public class TestVariables {
             System.out.println("任务id:" + task.getId());
             System.out.println("任务名称:" + task.getName());
             System.out.println("任务负责人:" + task.getAssignee());
-//            System.out.println("全局变量:" + taskService.getVariables(task.getId()));
+            System.out.println("全局变量:" + taskService.getVariables(task.getId()));
             System.out.println("===========");
         }
     }
