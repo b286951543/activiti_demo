@@ -127,9 +127,11 @@ public class ActivitiDemo {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("userId", "1");
         paramMap.put("userName", "小明");
-        paramMap.put("why", "拉肚子");
+        paramMap.put("why", "拉肚子"); // 该变量是该流程实例的全局变量
         // worker 把任务提交到 manager
         taskService.complete(task.getId(), paramMap);
+
+//        taskService.setVariablesLocal(task.getId(), paramMap); // 设置local 变量
     }
 
     // manager 完成任务

@@ -67,13 +67,16 @@ public class TestVariables {
         List<Task> list = taskService.createTaskQuery()
                 .processDefinitionKey("evection_global")
 //                .processInstanceId("15001") // 可以根据实例id来查找
-//                .taskAssignee("张财务")
+//                .taskAssignee("王经理")
                 .list();
 
+        ;
         for (Task task: list){
+            System.out.println("实例id:" + task.getProcessInstanceId());
             System.out.println("任务id:" + task.getId());
             System.out.println("任务名称:" + task.getName());
             System.out.println("任务负责人:" + task.getAssignee());
+//            System.out.println("全局变量:" + taskService.getVariables(task.getId()));
             System.out.println("===========");
         }
     }
@@ -89,11 +92,21 @@ public class TestVariables {
         Task task = taskService.createTaskQuery()
                 .processDefinitionKey("evection_global")
 //                .processInstanceId("15001") // 可以根据实例id来查找
-                .taskAssignee("王经理")
+                .taskAssignee("李四")
                 .singleResult(); // 这里只会查询到一个任务，如果查到有多个任务，会抛出异常
 
         if (task != null){
-            taskService.complete(task.getId());
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("param", "参数1");
+
+//            taskService.complete(task.getId(), map); // 全局变量，在整个流程实例都有效
+
+//            taskService.complete(task.getId(), map, true); // 参数不知道怎么取出来，不要用
+
+//            taskService.complete(task.getId());
+
+//            taskService.setVariablesLocal(task.getId(), map); // 本地变量，只在当前任务有效，下一个任务会失效。能通过 taskService.getVariablesLocal( taskid ) 获取
+//            taskService.complete(task.getId());
         }
     }
 }
