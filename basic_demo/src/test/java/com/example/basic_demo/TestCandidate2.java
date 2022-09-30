@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * 任务的候选人测试
  */
-public class TestCandidate {
+public class TestCandidate2 {
     @Test
     void testDeployment() {
         // 创建 processEngine
@@ -23,7 +23,7 @@ public class TestCandidate {
         Deployment deployment = repositoryService.createDeployment()
                 .addClasspathResource("bpmn/leave2.bpmn20.xml")
                 .addClasspathResource("bpmn/leave2.png") // png,jpg,gif,svg
-                .name("请假申请-候选人测试")
+                .name("请假申请-候选人测试2")
                 .deploy();
 
         System.out.println("流程部署id:" + deployment.getId());

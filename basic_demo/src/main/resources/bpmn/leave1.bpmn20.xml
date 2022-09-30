@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/processdef">
-  <process id="leave2" name="请假申请-候选人测试2" isExecutable="true">
+  <process id="leave1" name="请假申请-候选人测试1" isExecutable="true">
     <endEvent id="sid-acc93230-98cc-4b0a-8715-2a13418e2aa2" name="end"/>
     <userTask id="sid-783980b9-0396-40e6-bf82-866f27a149d2" name="提交请假申请" activiti:assignee="worker"/>
-    <userTask id="sid-0ca158d2-2e4b-4a8a-834a-4bc02704eb5f" name="部门经理审批" activiti:candidateUsers="王经理,李经理"/>
+    <userTask id="sid-0ca158d2-2e4b-4a8a-834a-4bc02704eb5f" name="部门经理审批" activiti:candidateUsers="${candidateUsers}"/>
     <userTask id="sid-d1c8877c-c335-4330-8d88-b8ff2c28a844" name="财务审批" activiti:assignee="financer"/>
     <startEvent id="sid-b21c4d40-44ad-4bdd-8019-972754c0f446" name="start"/>
     <sequenceFlow id="sid-77446574-f803-4864-b66d-79b2f69f664b" sourceRef="sid-b21c4d40-44ad-4bdd-8019-972754c0f446" targetRef="sid-783980b9-0396-40e6-bf82-866f27a149d2"/>
@@ -12,7 +12,7 @@
     <sequenceFlow id="sid-637812be-5caa-4fd5-890f-0f2dbd7721f8" sourceRef="sid-0ca158d2-2e4b-4a8a-834a-4bc02704eb5f" targetRef="sid-d1c8877c-c335-4330-8d88-b8ff2c28a844"/>
   </process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_dd">
-    <bpmndi:BPMNPlane bpmnElement="leave2" id="BPMNPlane_dd">
+    <bpmndi:BPMNPlane bpmnElement="leave1" id="BPMNPlane_dd">
       <bpmndi:BPMNShape id="shape-0ef2b532-0e74-4bef-b8b7-c867193c4e5e" bpmnElement="sid-acc93230-98cc-4b0a-8715-2a13418e2aa2">
         <omgdc:Bounds x="639.7417" y="78.85832" width="30.0" height="30.0"/>
       </bpmndi:BPMNShape>
