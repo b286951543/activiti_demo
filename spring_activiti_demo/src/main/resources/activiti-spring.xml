@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                    http://www.springframework.org/schema/beans/spring-beans.xsd
+                    http://www.springframework.org/schema/aop
+                    http://www.springframework.org/schema/aop/spring-aop.xsd
+                    http://www.springframework.org/schema/tx
+                    http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!-- 数据源 -->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3307/activiti?useUnicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=Asia/Shanghai&amp;useSSL=false"/>
+        <property name="username" value="root"/>
+        <property name="password" value="123456"/>
+        <property name="maxActive" value="3"/>
+        <property name="maxIdle" value="1"/>
+    </bean>
+
+    <bean id="processEngineConfiguration" class="org.activiti.spring.SpringProcessEngineConfiguration">
+        <!-- 引用数据源 -->
+        <property name="dataSource" ref="dataSource"/>
+        <!-- actitivi 数据库表处理策略 -->
+        <!-- true=启动时检查表结构，没有则创建，有则不处理 -->
+        <!-- false=启动时检查表结构，没有则报错，有则不处理 -->
+        <!-- true,false,create-drop,drop-create -->
+        <property name="databaseSchemaUpdate" value="false"/>
+
+        <!-- 使用 spring 管理事务 -->
+        <property name="transactionManager" ref="transactionManager"/>
+    </bean>
+
+    <!-- 流程引擎 -->
+    <bean id="processEngine" class="org.activiti.spring.ProcessEngineFactoryBean">
+        <property name="processEngineConfiguration" ref="processEngineConfiguration"/>
+    </bean>
+    <!-- 资源服务service -->
+    <bean id="repositoryService" factory-bean="processEngine" factory-method="getRepositoryService"/>
+    <!-- 流程运行service -->
+    <bean id="runtimeService" factory-bean="processEngine" factory-method="getRuntimeService"/>
+    <!-- 任务管理service -->
+    <bean id="taskService" factory-bean="processEngine" factory-method="getTaskService"/>
+    <!-- 历史管理service -->
+    <bean id="historyService" factory-bean="processEngine" factory-method="getHistoryService"/>
+    <!-- 事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- 通知 -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <!-- 事务的传播行为 -->
+            <tx:method name="save*" propagation="REQUIRED"/> <!-- 默认required，共用一个事物，即当前没有事务就建一个，有事务就加入。 -->
+            <tx:method name="insert*" propagation="REQUIRED"/>
+            <tx:method name="delete*" propagation="REQUIRED"/>
+            <tx:method name="update*" propagation="REQUIRED"/>
+            <tx:method name="find*" propagation="SUPPORTS" read-only="true"/> <!-- 不存在事务不新建，但你调用我时带事务我就加入，秉持着打不赢我就加入你的原则 -->
+            <tx:method name="get*" propagation="SUPPORTS" read-only="true"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <!-- 切面，根据具体项目修改切点配置 -->
+    <!-- advice-ref 意思是在执行 pointcut 的方法前、后，会插入 txAdvice 里的一段逻辑-->
+<!--    <aop:config proxy-target-class="true">-->
+<!--        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.bobo.service.impl.*(..))"/>-->
+<!--    </aop:config>-->
+</beans>

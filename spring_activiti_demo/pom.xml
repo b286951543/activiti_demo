@@ -5,7 +5,7 @@
     <parent>
         <artifactId>activiti_demo</artifactId>
         <groupId>com.example</groupId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -14,6 +14,63 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <activiti.version>7.1.0.M6</activiti.version>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-spring</artifactId>
+            <version>${activiti.version}</version>
+        </dependency>
+
+        <!-- bpmn json 数据转换 -->
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-json-converter</artifactId>
+            <version>${activiti.version}</version>
+        </dependency>
+
+        <!-- bpmn 布局 -->
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-bpmn-layout</artifactId>
+            <version>${activiti.version}</version>
+        </dependency>
+
+        <!-- mybatis -->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>2.2.2</version>
+        </dependency>
+        <!-- mysql 驱动 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <!-- 连接池 -->
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>1.4</version>
+        </dependency>
+
+        <!-- log -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.36</version>
+        </dependency>
+        <!--		<dependency>-->
+        <!--			<groupId>org.slf4j</groupId>-->
+        <!--			<artifactId>slf4j-log4j12</artifactId>-->
+        <!--			<version>1.7.36</version>-->
+        <!--		</dependency>-->
+    </dependencies>
 </project>
