@@ -1,7 +1,5 @@
 package com.example.spring_activiti_demo;
 
-import org.activiti.engine.ProcessEngine;
-import org.activiti.engine.ProcessEngines;
 import org.activiti.engine.RepositoryService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
