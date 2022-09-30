@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 // Using generated security password: 0a7a2af2-8309-484c-8599-33ea62ddb0b9
 // This generated password is for development use only. Your security configuration must be updated before running your application in production.
 // 如果我们想使用不同的安全配置而不是 HTTP Basic 身份验证，可以关闭禁用spring security，之后就可以不带验证的访问服务了。方式如下
+// 该配置没效果
 //@SpringBootApplication(exclude = {
 //		SecurityAutoConfiguration.class,
 //		ManagementWebSecurityAutoConfiguration.class
