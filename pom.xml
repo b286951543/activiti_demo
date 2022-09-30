@@ -6,6 +6,7 @@
 	<modules>
 		<module>spring_activiti_demo</module>
 		<module>basic_demo</module>
+		<module>springboot_activiti_demo</module>
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
