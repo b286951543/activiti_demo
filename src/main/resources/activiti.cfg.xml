@@ -24,7 +24,8 @@
         <!-- 引用数据源 -->
         <property name="dataSource" ref="dataSource"/>
         <!-- actitivi 数据库表处理策略 -->
-        <!-- 启动时检查表结构，没有则创建，有则检查是否符合要求 -->
+        <!-- true=启动时检查表结构，没有则创建，有则不处理 -->
+        <!-- false=启动时检查表结构，没有则报错，有则不处理 -->
         <!-- true,false,create-drop,drop-create -->
         <property name="databaseSchemaUpdate" value="false"/>
     </bean>

@@ -1,6 +1,6 @@
-package com.example.activiti_demo;
+package com.example.basic_demo;
 
-import com.example.activiti_demo.model.Evection;
+import com.example.basic_demo.model.Evection;
 import org.activiti.engine.*;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.task.Task;
@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class TestVariables {
     /**
